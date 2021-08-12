@@ -6,5 +6,5 @@ interface Props {
 }
 
 export const Cell: React.FC<Props> = ({num}) => {
-    return num === null ? <div className="cell">-1</div> : <h1>{num}</h1>;
+    return num === null ? <div className="cell">-1</div> : <div className="cell">{num}</div>;
 }

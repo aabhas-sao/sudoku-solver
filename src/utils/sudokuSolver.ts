@@ -1,36 +1,15 @@
-function sqrt(n: number) {
-    let ans: number = 0;
-    for(let i = 1; i <= n; i++) {
-        if(i * i === n) return i;
-        if(i * i > n) {
-            ans = i;
-            break;
-        }
-    }
-    return ans - 1;
-}
-
-function canPlace(i:number, j:number, n: number, grid:(number | null)[][]): boolean {
+function canPlace(i: number, j: number, n: number, grid:(number | null)[][], tobePlaced: number): boolean {
     // check row and col
-    for (let k = 0; k < n; k++) {
-        if(k === j) continue;
-        if(grid[i][k] === grid[i][j]) return false;
+    for (let k: number = 0; k < n; k++) {
+        if(grid[i][k] === tobePlaced || grid[k][j] === tobePlaced) return false;
     }
 
-    for (let k = 0; k < n; k++) {
-        if(k === i) continue;
-        if(grid[k][i] === grid[i][j]) return false;
-    }
-
-    let x = sqrt(n);
-
-    let startRow = i / x;
-    let startCol = j / x;
-
+    let x = Math.sqrt(n);
+    let startRow: number = Math.floor(i / x) * x;
+    let startCol: number = Math.floor(j / x) * x;
     for (let p = startRow; p < startRow + x; p++) {
         for (let q = startCol; q < startCol + x; q++) {
-            if(p === i && q === j) continue;
-            if(grid[p][q] === grid[i][j]) return false;
+            if(grid[p][q] === tobePlaced) return false;
         }
     }
 
@@ -39,35 +18,39 @@ function canPlace(i:number, j:number, n: number, grid:(number | null)[][]): bool
 
 function sudokuHelper(i: number, j: number, n: number, grid:(number | null)[][]): boolean {
     // base case
-    if(i === n) {
+    if(i >= n) {
+        console.log("end reached");
         return true;
     }
 
-    // if reached end of the column move to next row
-    if(j === n) {
-        sudokuHelper(i + 1, 0, n, grid);
-    }
 
+    // if reached end of the column move to next row
+    if(j >= n) {
+        return sudokuHelper(i + 1, 0, n, grid);
+    }
     // recursive case
     // if the current cell is empty, try to fill it
-    if(grid[i][j] !== null) {
-        let solveKarPaye: boolean = false;
-        for (let i = 1; i <= n; i++) {
-            if(canPlace(i, j, n, grid)) {
-                solveKarPaye = sudokuHelper(i, j + 1, n, grid);
-                if(solveKarPaye) break;
+    if(grid[i][j] === 0) {
+        for (let k = 1; k <= n; k++) {
+            if(canPlace(i, j, n, grid, k)) {
+                grid[i][j] = k;
+                let solveKarPaye: boolean = sudokuHelper(i, j + 1, n, grid);
+                if(solveKarPaye) return true;
             }
         }
         // backtracking step
-        if(!solveKarPaye) {
-            grid[i][j] = null;
-            return false;
-        }
+        grid[i][j] = 0;
+        return false;
+    } else {
+        return sudokuHelper(i, j + 1, n, grid);
     }
-
-    return true;
 }
 
-export const sudokuSolver = (n: number, grid: (number | null)[][]) => {
-    sudokuHelper(0, 0, n, grid);
+export const sudokuSolver = (n: number, grid: (number | null)[][]): (number | null)[][] => {
+    let gridCopy = grid.slice();
+    let t1 = performance.now();
+    sudokuHelper(0, 0, n, gridCopy);
+    let t2 = performance.now();
+    console.log(t2-t1, "ms");
+    return gridCopy;
 }
