@@ -19,7 +19,6 @@ function canPlace(i: number, j: number, n: number, grid:(number | null)[][], tob
 function sudokuHelper(i: number, j: number, n: number, grid:(number | null)[][]): boolean {
     // base case
     if(i >= n) {
-        console.log("end reached");
         return true;
     }
 
@@ -48,9 +47,6 @@ function sudokuHelper(i: number, j: number, n: number, grid:(number | null)[][])
 
 export const sudokuSolver = (n: number, grid: (number | null)[][]): (number | null)[][] => {
     let gridCopy = grid.slice();
-    let t1 = performance.now();
     sudokuHelper(0, 0, n, gridCopy);
-    let t2 = performance.now();
-    console.log(t2-t1, "ms");
     return gridCopy;
 }
