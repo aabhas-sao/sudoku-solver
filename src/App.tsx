@@ -2,12 +2,13 @@ import React from 'react';
 import {Board} from './components/board';
 import './App.scss';
 import {createDefaultGrid} from './utils/createDefaultGrid';
+import { ControlPanel } from './components/controlPanel';
 
 const App: React.FC = () => {
   return (
     <div className="App">
-      <h1>Sudoku Solver</h1>
       <Board gridDefault={createDefaultGrid()} />
+      <ControlPanel />
     </div>
   );
 }

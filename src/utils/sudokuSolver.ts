@@ -1,4 +1,4 @@
-function canPlace(i: number, j: number, n: number, grid:(number | null)[][], tobePlaced: number): boolean {
+export function canPlace(i: number, j: number, n: number, grid:number[][], tobePlaced: number): boolean {
     // check row and col
     for (let k: number = 0; k < n; k++) {
         if(grid[i][k] === tobePlaced || grid[k][j] === tobePlaced) return false;
@@ -16,12 +16,11 @@ function canPlace(i: number, j: number, n: number, grid:(number | null)[][], tob
     return true;
 }
 
-function sudokuHelper(i: number, j: number, n: number, grid:(number | null)[][]): boolean {
+function sudokuHelper(i: number, j: number, n: number, grid:number[][]): boolean {
     // base case
     if(i >= n) {
         return true;
     }
-
 
     // if reached end of the column move to next row
     if(j >= n) {
@@ -45,7 +44,7 @@ function sudokuHelper(i: number, j: number, n: number, grid:(number | null)[][])
     }
 }
 
-export const sudokuSolver = (n: number, grid: (number | null)[][]): (number | null)[][] => {
+export const sudokuSolver = (n: number, grid: number[][]): number[][] => {
     let gridCopy = grid.slice();
     sudokuHelper(0, 0, n, gridCopy);
     return gridCopy;

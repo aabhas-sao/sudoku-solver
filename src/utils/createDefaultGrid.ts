@@ -1,7 +1,7 @@
 export const GRID_SIZE: number = 9;
-export const createDefaultGrid: () => (null | number )[][] = () => {
-    const rows: (null | number)[] = [];
-    const grid: (null | number)[][] = [];    
+export const createDefaultGrid: () => number[][] = () => {
+    const rows: number[] = [];
+    const grid: number[][] = [];    
 
     for (let i = 0; i < GRID_SIZE; i++) { 
         rows.push(0);

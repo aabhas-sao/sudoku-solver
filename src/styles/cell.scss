@@ -1,8 +1,16 @@
 .cell {
-    background-color: #333;
+    background-color: #FB5E5E;
     width: 100%;
     color: #eee;
-    border: 1px solid white;
+    border: 2px solid #C2BFC1;
     height: 100%;
     font-size: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.selected {
+    background-color: #464642;
 }
