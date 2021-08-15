@@ -5,6 +5,7 @@ import { sudokuSolver } from '../utils/sudokuSolver';
 import { ToastContainer, toast } from 'react-toastify';
 import { GRID_SIZE } from '../utils/createDefaultGrid';
 import {validateProblem} from '../utils/validateProblem';
+import { ControlPanel } from './controlPanel';
 import 'react-toastify/dist/ReactToastify.css';
 
 interface Props {
@@ -15,6 +16,7 @@ export const Board: React.FC<Props> = ({gridDefault}) => {
     const [grid, setGrid] = useState<number[][]>(gridDefault);
     const [selectedRow, setSelectedRow] = useState<number>(0);
     const [selectedCol, setSelectedCol] = useState<number>(0);
+
 
     const handleSolve = () => {
         if(validateProblem(grid)) {
@@ -132,5 +134,6 @@ export const Board: React.FC<Props> = ({gridDefault}) => {
                 draggable
                 pauseOnHover
         />
+        <ControlPanel handleSolve={handleSolve} />
     </div>;
-}
+};

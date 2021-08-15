@@ -1,9 +1,9 @@
 
 #board-outer {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 80%;
 
     & #board-container {
         background-color: #464642;

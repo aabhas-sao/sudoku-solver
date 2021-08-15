@@ -1,7 +1,11 @@
 import React from 'react';
 import '../styles/controlPanel.scss';
 
-export const ControlPanel: React.FC = () => {
+interface Props {
+    handleSolve: () => void;
+}
+
+export const ControlPanel: React.FC<Props> = ({handleSolve}) => {
     return (<div id="control-panel">
         <h1 className="title">Sudoku Solver</h1>
         <article>
@@ -21,10 +25,19 @@ export const ControlPanel: React.FC = () => {
                     <span >to move Horizontally</span>
                 </div>
                 <br/><br/>
-                <span className="controls-box" >Press any number to set value</span>
+                <div className="controls-box" >
+                    Press any number to set value
+                    <p className="small-note">
+                        <br/>
+                        PS: 
+                        Currently site is best viewed on desktop, 
+                        <br/>
+                        controls for mobile devices coming soon
+                    </p>
+                </div>
             </span>
         </article>
-        <button id="solveButton">
+        <button onClick={handleSolve} id="solveButton">
             Solve Board    
         </button>
     </div>);
