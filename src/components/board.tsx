@@ -2,8 +2,10 @@ import React, {useState, useEffect} from 'react';
 import {Cell} from './cell';
 import '../styles/board.scss';
 import { sudokuSolver } from '../utils/sudokuSolver';
+import { ToastContainer, toast } from 'react-toastify';
 import { GRID_SIZE } from '../utils/createDefaultGrid';
 import {validateProblem} from '../utils/validateProblem'
+import 'react-toastify/dist/ReactToastify.css';
 
 interface Props {
     gridDefault : number[][];
@@ -13,12 +15,21 @@ export const Board: React.FC<Props> = ({gridDefault}) => {
     const [grid, setGrid] = useState<number[][]>(gridDefault);
     const [selectedRow, setSelectedRow] = useState<number>(0);
     const [selectedCol, setSelectedCol] = useState<number>(0);
-    
+
     const handleSolve = () => {
         if(validateProblem(grid)) {
             setGrid(sudokuSolver(GRID_SIZE, grid));
         } else {
-            console.log("invalid problem");
+            toast('⚠️ Invalid problem statement', {
+                position: "bottom-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                type: "error",
+                });
         }
     }
 
@@ -111,6 +122,20 @@ export const Board: React.FC<Props> = ({gridDefault}) => {
             }
             </div>
         </div>
-        <button onClick={handleSolve}>Solve Board</button>
+        <ToastContainer
+                position="bottom-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+        />
+        <button id="solveButton" onClick={handleSolve}>
+            Solve Board
+            
+        </button>
     </div>;
 }
