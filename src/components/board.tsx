@@ -4,7 +4,7 @@ import '../styles/board.scss';
 import { sudokuSolver } from '../utils/sudokuSolver';
 import { ToastContainer, toast } from 'react-toastify';
 import { GRID_SIZE } from '../utils/createDefaultGrid';
-import {validateProblem} from '../utils/validateProblem'
+import {validateProblem} from '../utils/validateProblem';
 import 'react-toastify/dist/ReactToastify.css';
 
 interface Props {
@@ -132,9 +132,5 @@ export const Board: React.FC<Props> = ({gridDefault}) => {
                 draggable
                 pauseOnHover
         />
-        <button id="solveButton" onClick={handleSolve}>
-            Solve Board
-            
-        </button>
     </div>;
 }
