@@ -48,7 +48,6 @@ export const Board: React.FC<Props> = ({gridDefault}) => {
     const handlePress = (e: KeyboardEvent): void => {
     let c = selectedCol;
     let r = selectedRow;
-
     if(nums.indexOf(e.key) !== -1) {
         setGrid(prevState => prevState.map(
             (row, i) => row.map(
@@ -63,7 +62,7 @@ export const Board: React.FC<Props> = ({gridDefault}) => {
             
     }
 
-    if(e.key === "ArrowRight" || e.key === "d") {
+    if(e.key === "ArrowRight" || e.key === "d" || e.key === " ") {
         
         if(selectedCol === GRID_SIZE - 1) {
         r = r + 1;
