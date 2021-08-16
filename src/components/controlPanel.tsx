@@ -9,6 +9,7 @@ interface Props {
 export const ControlPanel: React.FC<Props> = ({handleSolve, reset}) => {
     return (<div id="control-panel">
         <h1 className="title">Sudoku Solver</h1>
+        <br />
         <article>
             <h2>Controls</h2>
             <br/>
