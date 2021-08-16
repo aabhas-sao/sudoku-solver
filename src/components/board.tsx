@@ -13,14 +13,21 @@ interface Props {
 }
 
 export const Board: React.FC<Props> = ({gridDefault}) => {
-    const [grid, setGrid] = useState<number[][]>(gridDefault);
+    const [grid, setGrid] = useState<number[][]>(gridDefault.slice());
     const [selectedRow, setSelectedRow] = useState<number>(0);
     const [selectedCol, setSelectedCol] = useState<number>(0);
 
+    const clearGrid = () => {
+        setGrid(prevState => prevState.map(rows => rows.map(item => 0)));
+    }
 
     const handleSolve = () => {
         if(validateProblem(grid)) {
-            setGrid(sudokuSolver(GRID_SIZE, grid));
+            const solvedGrid = sudokuSolver(GRID_SIZE, grid);
+            setGrid(prevState => prevState.map((rows, r) =>  
+            rows.map((item, c) => 
+                solvedGrid[r][c]
+            )));
         } else {
             toast('⚠️ Invalid problem statement', {
                 position: "bottom-center",
@@ -33,10 +40,6 @@ export const Board: React.FC<Props> = ({gridDefault}) => {
                 type: "error",
                 });
         }
-    }
-
-    const handleKey = (e: React.KeyboardEvent<HTMLDivElement>) => {
-        console.log('pressed sth', e.key)
     }
 
     const validMovement = (r: number, c: number): boolean => {
@@ -107,6 +110,10 @@ export const Board: React.FC<Props> = ({gridDefault}) => {
     }
 
     useEffect(() => {
+        console.log('grid changed')
+    }, [grid])
+
+    useEffect(() => {
         document.addEventListener("keydown", handlePress);
         return () => {
           document.removeEventListener("keydown", handlePress);
@@ -114,7 +121,7 @@ export const Board: React.FC<Props> = ({gridDefault}) => {
     }, [selectedCol, selectedRow]);
 
     return <div id='board-outer'>
-        <div id="board-container" onKeyDown={e => handleKey(e)}>
+        <div id="board-container">
             <div id="board">
             {
                 grid.map((rows, r) => 
@@ -134,6 +141,6 @@ export const Board: React.FC<Props> = ({gridDefault}) => {
                 draggable
                 pauseOnHover
         />
-        <ControlPanel handleSolve={handleSolve} />
+        <ControlPanel handleSolve={handleSolve} reset={clearGrid} />
     </div>;
 };

@@ -3,9 +3,10 @@ import '../styles/controlPanel.scss';
 
 interface Props {
     handleSolve: () => void;
+    reset: () => void;
 }
 
-export const ControlPanel: React.FC<Props> = ({handleSolve}) => {
+export const ControlPanel: React.FC<Props> = ({handleSolve, reset}) => {
     return (<div id="control-panel">
         <h1 className="title">Sudoku Solver</h1>
         <article>
@@ -39,6 +40,9 @@ export const ControlPanel: React.FC<Props> = ({handleSolve}) => {
         </article>
         <button onClick={handleSolve} id="solveButton">
             Solve Board    
+        </button>
+        <button onClick={reset} id="solveButton">
+            Clear    
         </button>
     </div>);
 }
