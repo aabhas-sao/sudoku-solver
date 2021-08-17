@@ -72,7 +72,7 @@ export const Board: React.FC<Props> = ({gridDefault}) => {
 
         const verticalValue = handleVerticalMovement(e, r, c);
         if( verticalValue !== 0) {
-            if(validMovement(r, c + verticalValue)) {
+            if(validMovement(r + verticalValue, c)) {
                 setSelectedRow(prevState => prevState + verticalValue);
             }
         }
