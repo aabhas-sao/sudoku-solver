@@ -4,7 +4,7 @@ Stuck on a sudoku problem for hours and feel like giving up ? May be you want to
 ## upcoming features
 - make ui friendly for small devices.
 - differetiate problem statement and solution with different font colors.
-- 
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
