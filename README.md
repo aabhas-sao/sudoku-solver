@@ -1,3 +1,10 @@
+# About
+Stuck on a sudoku problem for hours and feel like giving up ? May be you want to know the solution to verify where you made mistake or you want to flex among your friends that you can solve the sudoku in seconds meanwhile using this webapp in the backend 😈, you can do that. You can verify if a question is valid or not.
+
+## upcoming features
+- make ui friendly for small devices.
+- differetiate problem statement and solution with different font colors.
+- 
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
